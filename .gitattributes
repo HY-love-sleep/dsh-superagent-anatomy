@@ -1,0 +1,3 @@
+# Preserve upstream vendored files, including license formatting.
+docs/superagent-flow/assets/gsap.min.js -whitespace
+docs/superagent-flow/assets/fonts/OFL.txt -whitespace
