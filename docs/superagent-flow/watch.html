@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Superagent 设计与交互流程 · 60 秒</title><style>
+body{margin:0;background:#e8e9ed;color:#142238;font:16px/1.65 system-ui,sans-serif}main{max-width:1200px;margin:auto;padding:28px 24px}h1{font-size:26px;margin:0 0 6px}p{margin:8px 0 18px}.screen{position:relative;aspect-ratio:16/9;background:#f3f1e9;overflow:hidden;border-radius:10px;box-shadow:0 12px 36px #14223818}iframe{border:0;width:1920px;height:1080px;transform-origin:top left;position:absolute;left:0;top:0}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0}button,a.button{font:inherit;padding:8px 16px;border:1px solid #b5bfd3;border-radius:7px;background:white;color:#142238;text-decoration:none;cursor:pointer}button:hover,a.button:hover{background:#e5ebff}input{flex:1;min-width:160px;accent-color:#1545da}.chapters{display:flex;gap:8px;flex-wrap:wrap}details{margin-top:24px;background:#fff;padding:16px 22px;border-radius:8px}summary{cursor:pointer;font-weight:700}a{color:#1545da}li{margin:8px 0}.note{font-size:14px;color:#526077}video{width:100%;border-radius:8px}footer{font-size:13px;color:#526077;margin-top:24px}
+</style></head><body><main>
+<h1>Superagent：从一句请求到闭环交付</h1>
+<p>调度者决定接什么，Engine 记录规则与状态，Worker 完成工作，再把结果送回原会话。</p>
+<div class="screen" id="screen"><iframe id="film" src="index.html" title="Superagent 六幕动画"></iframe></div>
+<div class="controls"><button id="play" type="button" disabled>播放</button><input id="seek" type="range" min="0" max="60" value="0" step="0.1" aria-label="播放进度"><output id="time">00:00 / 01:00</output><a class="button" href="superagent-flow.mp4" download>下载 MP4</a></div>
+<nav class="chapters" aria-label="章节"><button data-at="0">01 一句话</button><button data-at="10">02 三种职责</button><button data-at="20">03 消息准入</button><button data-at="30">04 接单执行</button><button data-at="40">05 后续要求</button><button data-at="50">06 结果回传</button></nav>
+<p class="note">60 秒 / 1920 × 1080 / 30 fps。视频为无声图解；HTML 可播放、暂停、拖动及逐章查看。</p>
+<details><summary>只看结论：六句话讲清流程</summary><ol><li>核心是有归属、有记录的工单，而不是一条临时聊天。</li><li>Orchestrator 判断语义与路由；Engine 维护规则与状态；Worker 执行和自检。</li><li>新消息先归一化、去重和检查准入；不是每个 @ 都会直接开工。</li><li>接受后保存工单、授权及执行安排，再异步准备目录和独立会话。</li><li>原任务线程的相关人类后续消息通常直达原 Worker；超范围交回评估。</li><li>报告先回系统，常规结果经调度者组织回复、Outbox 投递回原会话。</li></ol></details>
+<details><summary>依据与边界（固定版本源码）</summary><p>依据公开研究原型提交 <code>6337fc823ce20251c8de8085948165c81aaa701e</code>；并非官方产品或生产能力承诺。本片为静态源码解读，未运行真实飞书接收与回信链路。</p><ul>
+<li><a href="https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/README.md#L3-L11">研究原型声明</a></li>
+<li><a href="https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/docs/007-architecture.md">角色与整体架构</a></li>
+<li><a href="https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/src/core/intake.ts#L19-L61">去重、范围检查与后续消息分流</a></li>
+<li><a href="https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/src/executor/dsh.ts#L237-L284">异步排队与目录准备</a></li>
+<li><a href="https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/src/app/notices.ts#L107-L129">报告何时转交主会话</a></li>
+<li><a href="https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/src/sources/github-pull.ts#L85-L104">PR 合并 / 关闭终态的系统通知例外</a></li>
+</ul><p>独立目录不等于安全沙箱；prepare 不内置固定 Git 流程；ready 不保证正确或已合并；排队不代表送达。普通进展通常留内部，但接单确认和 PR 终态通知另有路径。</p></details>
+<footer>由 HTML 时间线通过 Hyperframes 0.9.0 本地渲染；不需要 HeyGen 账号。动画库：GSAP 3.14.2，许可见本目录 THIRD-PARTY-NOTICES.md。</footer>
+</main><script>
+const film=document.getElementById('film'),seek=document.getElementById('seek'),play=document.getElementById('play');let tl;
+function fit(){film.style.transform=`scale(${document.getElementById('screen').clientWidth/1920})`;}
+new ResizeObserver(fit).observe(document.getElementById('screen'));fit();
+film.addEventListener('load',()=>{tl=film.contentWindow.__timelines?.superagent;if(!tl){document.getElementById('time').textContent='动画未载入：请参阅 README 启动本地预览';return;}play.disabled=false;tl.eventCallback('onUpdate',()=>{const t=tl.time();seek.value=t;document.getElementById('time').textContent=`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t)%60).padStart(2,'0')} / 01:00`;film.contentDocument.getElementById('chapter').textContent=String(Math.min(6,Math.floor(t/10)+1)).padStart(2,'0')+' / 06';});tl.eventCallback('onComplete',()=>{play.textContent='重播';});});
+play.addEventListener('click',()=>{if(tl.time()>=60){tl.restart();play.textContent='暂停';}else if(tl.paused()){tl.play();play.textContent='暂停';}else{tl.pause();play.textContent='播放';}});
+seek.addEventListener('input',()=>{if(!tl)return;tl.pause().seek(Math.min(59.999,Number(seek.value)),false);play.textContent='播放';});
+document.querySelectorAll('[data-at]').forEach(b=>b.addEventListener('click',()=>{if(!tl)return;tl.pause().seek(Number(b.dataset.at)+1.8,false);play.textContent='播放';}));
+</script></body></html>

@@ -1,0 +1,131 @@
+{
+  "hyperframesVersion": "0.9.0",
+  "checkOk": true,
+  "checks": {
+    "lint": {
+      "ok": true,
+      "errors": 0,
+      "warnings": 7,
+      "warningCodes": [
+        "nested_structure_needs_subcomposition",
+        "timeline_track_too_dense"
+      ]
+    },
+    "runtime": {
+      "ok": true,
+      "errors": 0,
+      "warnings": 0,
+      "warningCodes": []
+    },
+    "layout": {
+      "ok": true,
+      "errors": 0,
+      "warnings": 0,
+      "warningCodes": []
+    },
+    "motion": {
+      "ok": true,
+      "errors": 0,
+      "warnings": 0,
+      "warningCodes": []
+    },
+    "contrast": {
+      "ok": true,
+      "errors": 0,
+      "warnings": 0,
+      "warningCodes": []
+    },
+    "craft": {
+      "ok": true,
+      "errors": 0,
+      "warnings": 8,
+      "warningCodes": [
+        "dead_stretch",
+        "film_silent",
+        "text_below_floor"
+      ]
+    },
+    "audio": {
+      "ok": true,
+      "errors": 0,
+      "warnings": 0,
+      "warningCodes": []
+    }
+  },
+  "browser": {
+    "ok": true,
+    "baselineRevision": "544de48a6b535f273e81fac829dd717280adcf44",
+    "baselineStatus": 404,
+    "changedStatus": 200,
+    "scenario": "watch.html; light theme; 1440x1100; chapter 02 after load",
+    "fontLoaded": true,
+    "scenePixelHashes": {
+      "5": "ab6435e3f42398c5a5dafb8ad6e97c6df8629c1fe134358e482c5f110f833122",
+      "15": "6374f6e33e6ab5f4381aec99bf6fb74b3ebbc4b00149066f5c042b1051bb74bf",
+      "25": "947a149bcef752482de3b17318707a4fefcba8fc0de15fd4a417457179ef76c0",
+      "35": "92d9a0dde8a447d2846b421063fb61b3481316e77a9e534cc327e5825129b266",
+      "45": "ba81ed9edd4c3e9547c6f6d73eb9653ea9c661a9fea76fe7251aa29737462adb",
+      "55": "94ed1ff1fc86d6b654bd9d7c6865cd71fac50c62cdb3de88e78c1f94b3c296df",
+      "59.75": "5e44c159976c7cae7c83268ffb3011c513e3dcd43f049baa1f80a72d5574cc8d"
+    },
+    "interactionTests": [
+      "chapter seek",
+      "play advances time",
+      "pause",
+      "slider",
+      "reverse seek",
+      "completion at 01:00",
+      "replay",
+      "mobile width"
+    ],
+    "browserErrors": []
+  },
+  "media": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_frames": "1800"
+      }
+    ],
+    "format": {
+      "duration": "60.000000",
+      "size": "4899591"
+    }
+  },
+  "decodedFrameComparison": {
+    "ok": true,
+    "results": [
+      {
+        "second": 5,
+        "ssimAgainstHTMLSnapshot": 0.999279
+      },
+      {
+        "second": 15,
+        "ssimAgainstHTMLSnapshot": 0.999214
+      },
+      {
+        "second": 25,
+        "ssimAgainstHTMLSnapshot": 0.999407
+      },
+      {
+        "second": 35,
+        "ssimAgainstHTMLSnapshot": 0.999138
+      },
+      {
+        "second": 45,
+        "ssimAgainstHTMLSnapshot": 0.999342
+      },
+      {
+        "second": 55,
+        "ssimAgainstHTMLSnapshot": 0.999181
+      }
+    ]
+  },
+  "fullDecode": "passed",
+  "manualImageReview": "unavailable: execution model has no image input"
+}

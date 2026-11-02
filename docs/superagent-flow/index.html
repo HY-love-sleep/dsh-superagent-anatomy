@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Superagent：从一句请求到闭环交付</title>
+<style>
+@font-face{font-family:Chinese;src:url('assets/fonts/noto-sans-sc-subset.woff2') format('woff2');font-weight:100 900;font-display:block}
+*{box-sizing:border-box}body{margin:0;background:#f3f1e9;color:#142238;font-family:Chinese,sans-serif}#stage{width:1920px;height:1080px;position:relative;overflow:hidden;background:#f3f1e9}.top{position:absolute;left:140px;right:140px;top:64px;display:flex;justify-content:space-between;font-size:22px;letter-spacing:3px;color:#526077}.brand{color:#1545da;font-weight:800}.scene{position:absolute;inset:0;padding:158px 160px 150px}.eyebrow{font-size:23px;letter-spacing:3px;color:#1545da;font-weight:700;margin:0 0 24px}h1{font-size:76px;line-height:1.22;letter-spacing:-2px;margin:0 0 24px;font-weight:800}h2{font-size:66px;line-height:1.25;margin:0 0 28px;letter-spacing:-1px}.lead{font-size:32px;line-height:1.65;color:#526077;margin:0}.accent{color:#1545da}.flow{display:flex;align-items:center;gap:22px;margin:62px 0 34px}.node{background:#fff;border:2px solid #dce1e9;border-radius:16px;padding:28px 34px;min-width:250px}.node strong{display:block;font-size:32px;margin-bottom:12px}.node small{display:block;font-size:25px;color:#526077}.node.blue{background:#1545da;color:white;border-color:#1545da}.node.blue small{color:#e3eaff}.arrow{font-size:44px;color:#1545da}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:58px}.card{background:white;border-top:5px solid #1545da;padding:34px 30px;border-radius:0 0 16px 16px;min-height:260px}.card .label{font-size:22px;color:#1545da;letter-spacing:2px}.card h3{font-size:35px;margin:20px 0 16px}.card p{font-size:27px;line-height:1.65;color:#526077;margin:0}.callout{font-size:28px;line-height:1.6;margin-top:38px;border-left:5px solid #1545da;padding-left:23px;color:#526077}.rail{position:absolute;bottom:112px;left:160px;right:160px;display:flex;justify-content:space-between;gap:20px;font-size:21px;color:#526077}.rail b{color:#1545da}.foot{position:absolute;left:140px;right:140px;bottom:60px;border-top:1px solid #cdd3df;padding-top:18px;font-size:19px;color:#526077;display:flex;justify-content:space-between}.progress{position:absolute;bottom:0;left:0;height:8px;width:1920px;background:#1545da;transform-origin:left}.bigquote{margin-top:55px;background:#142238;color:white;padding:35px 42px;border-radius:16px;font-size:38px;line-height:1.6}.compact .node{min-width:0;flex:1;padding:25px 24px}.compact .node strong{font-size:29px}.compact .node small{font-size:24px}.steps{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:46px}.step{display:flex;gap:22px;padding:27px 28px;background:white;border-radius:14px}.step span{font-size:38px;color:#1545da;font-weight:800}.step p{font-size:29px;line-height:1.6;margin:0}.step em{font-style:normal;color:#526077;font-size:25px}.final{font-size:44px;margin-top:40px;color:#1545da;font-weight:700}
+</style>
+</head>
+<body>
+<main id="stage" data-composition-id="superagent" data-start="0" data-duration="60" data-width="1920" data-height="1080" data-fps="30">
+<div class="top"><span class="brand">SUPERAGENT / 设计速览</span><span>60 秒 · 请求 → 任务 → 交付</span></div>
+<section id="intro" class="scene clip" data-start="0" data-duration="10" data-track-index="1"><div class="content">
+<p class="eyebrow">01 / 一句话理解</p><h1>不是「群里放一个聊天机器人」<br>而是<span class="accent">让请求变成可持续跟进的任务</span></h1>
+<p class="lead">把接单、执行和回信拆开，任务有归属，过程有记录，结果回到原会话。</p>
+<div class="flow"><div class="node"><strong>你提出请求</strong><small>飞书 / GitHub</small></div><div class="arrow">→</div><div class="node blue"><strong>系统组织任务</strong><small>判断、建单、分派</small></div><div class="arrow">→</div><div class="node"><strong>Worker 执行</strong><small>调查、制作、验证</small></div><div class="arrow">→</div><div class="node"><strong>原会话收结果</strong><small>交付物 / 必要问题</small></div></div>
+<div class="callout">核心对象是 Ticket（工单），不是一条临时的模型对话。</div>
+</div></section>
+<section id="roles" class="scene clip" data-start="10" data-duration="10" data-track-index="1"><div class="content">
+<p class="eyebrow">02 / 三种职责</p><h2>模型判断语义，<span class="accent">程序维护状态</span></h2><p class="lead">Orchestrator 管接单与对外沟通；Worker 管具体工作；Engine 管可编码的规则。</p>
+<div class="cards"><article class="card"><div class="label">ORCHESTRATOR / 调度者</div><h3>这是什么任务？交给谁？</h3><p>接受新工作、关联已有工单、忽略或停止；组织对外回复。</p></article><article class="card"><div class="label">ENGINE / 状态与规则</div><h3>这一步是否允许？</h3><p>去重与准入、工单状态、订阅、持久队列与回复条件。</p></article><article class="card"><div class="label">WORKER / 执行者</div><h3>怎么把任务做对？</h3><p>读取原请求、调查与实现、自检；报告结果或必要的阻塞。</p></article></div>
+<div class="callout">分工不等于三套模型：Engine 是程序逻辑，不是另一个 Agent。</div>
+</div></section>
+<section id="intake" class="scene clip" data-start="20" data-duration="10" data-track-index="1"><div class="content">
+<p class="eyebrow">03 / 新请求怎么进来</p><h2>先判断能否接，<span class="accent">再决定接不接</span></h2><p class="lead">Source 把外部消息变成 Trigger（事件），保留原文、发送者、线程与回信地址。</p>
+<div class="flow compact"><div class="node"><strong>消息 → Trigger</strong><small>统一事件格式</small></div><div class="arrow">→</div><div class="node"><strong>去重 / 范围</strong><small>避免重复或越界</small></div><div class="arrow">→</div><div class="node"><strong>Gate 准入</strong><small>授权与主动规则</small></div><div class="arrow">→</div><div class="node blue"><strong>调度者决定</strong><small>新接 / 关联 / 忽略 / 停止</small></div></div>
+<div class="bigquote">@ 机器人 ≠ 立即启动 Worker。<br>消息也可能只是上下文，不是一项新工作。</div>
+</div></section>
+<section id="execution" class="scene clip" data-start="30" data-duration="10" data-track-index="1"><div class="content">
+<p class="eyebrow">04 / 接单之后</p><h2>一项工单，<span class="accent">一段可继续的执行上下文</span></h2><p class="lead">接受后保存任务与授权来源，再异步排队启动；不是在接单瞬间直接执行全部工作。</p>
+<div class="flow compact"><div class="node"><strong>Ticket + 授权</strong><small>保存原始请求与范围</small></div><div class="arrow">→</div><div class="node"><strong>Assignment</strong><small>本次执行安排</small></div><div class="arrow">→</div><div class="node"><strong>Executor 准备</strong><small>目录 + 独立 Session</small></div><div class="arrow">→</div><div class="node blue"><strong>Worker 工作</strong><small>读取、执行、自检、报告</small></div></div>
+<div class="cards" style="margin-top:32px;grid-template-columns:1fr 1fr"><article class="card" style="min-height:150px"><h3 style="margin-top:0">目录怎么准备？</h3><p>由部署的 prepare 命令决定，不内置固定 clone / worktree 流程。</p></article><article class="card" style="min-height:150px"><h3 style="margin-top:0">独立上下文 ≠ 安全沙箱</h3><p>每工单目录与 Session，不代表容器或操作系统权限隔离。</p></article></div>
+</div></section>
+<section id="followup" class="scene clip" data-start="40" data-duration="10" data-track-index="1"><div class="content">
+<p class="eyebrow">05 / 中途追加要求</p><h2>继续同一件事，<span class="accent">通常不重新接单</span></h2><p class="lead">在工单自身线程里的相关人类后续消息，通常作为 Input 送回原 Worker。</p>
+<div class="steps"><div class="step"><span>01</span><p>你在原线程补充要求<br><em>例如：「把说明再压缩一点。」</em></p></div><div class="step"><span>02</span><p>订阅关系找到原工单<br><em>后续消息进入已有 Session。</em></p></div><div class="step"><span>03</span><p>Worker 判断是否仍在范围内<br><em>属于原任务就继续；超范围则交回评估。</em></p></div><div class="step"><span>04</span><p>有新线索可继续跟进<br><em>人工明确停止的任务不能擅自恢复。</em></p></div></div>
+<div class="callout">机器人 / CI 可提供上下文；新工作仍需规则授权，不能凭消息恢复已结束任务。</div>
+</div></section>
+<section id="delivery" class="scene clip" data-start="50" data-duration="10" data-track-index="1"><div class="content">
+<p class="eyebrow">06 / 形成闭环</p><h2>工作报告不是群消息，<span class="accent">就绪也不等于已送达</span></h2><p class="lead">常规结果回传：先记录事实，再组织回复，最后通过 Outbox 投递到原会话。</p>
+<div class="flow compact"><div class="node"><strong>Worker report</strong><small>进展 / 就绪 / 必要问题</small></div><div class="arrow">→</div><div class="node"><strong>工单记录</strong><small>保存结果与证据</small></div><div class="arrow">→</div><div class="node blue"><strong>调度者 reply</strong><small>按回复条件组织消息</small></div><div class="arrow">→</div><div class="node"><strong>Outbox → 原会话</strong><small>持久排队、去重、重试</small></div></div>
+<div class="callout">普通进展留内部；交付结果或确需人处理时再通知。<br>例外：PR 合并 / 关闭的终态通知，可由系统直接发送。</div>
+<p class="final">记住：接单有边界，执行有归属，交付回原处。</p>
+</div></section>
+<div class="rail"><b id="chapter">01 / 06</b><span>请求 → 准入与路由 → 工单 → Worker → 结果回传</span></div>
+<div class="foot"><span>依据：公开研究原型 dsh-superagent-prototype · 6337fc8 · 非生产能力承诺</span><span>设计与交互流程 / 中文速览</span></div>
+<div class="progress" data-layout-ignore></div>
+</main>
+<script src="assets/gsap.min.js"></script>
+<script>
+const tl = gsap.timeline({paused:true});
+const scenes = [...document.querySelectorAll('.scene')];
+scenes.forEach((scene,i)=>{
+  const at=i*10, child=scene.querySelector('.content');
+  tl.set(scene,{opacity:0},0);
+  tl.set(scene,{opacity:1},at);
+  tl.fromTo(child,{opacity:0,y:22},{opacity:1,y:0,duration:.55,ease:'power2.out'},at);
+  tl.fromTo(scene.querySelectorAll('.node,.card,.step'),{opacity:0,y:18},{opacity:1,y:0,duration:.45,stagger:.12,ease:'power2.out'},at+1);
+  if(i<5)tl.to(child,{opacity:0,duration:.2},at+9.8);
+  if(i<5)tl.set(scene,{opacity:0},at+10);
+});
+tl.fromTo('.progress',{scaleX:0},{scaleX:1,duration:60,ease:'none'},0);
+tl.eventCallback('onUpdate',()=>{document.getElementById('chapter').textContent=String(Math.min(6,Math.floor(tl.time()/10)+1)).padStart(2,'0')+' / 06';});
+window.__timelines = {superagent:tl};
+tl.seek(0);
+</script>
+</body>
+</html>
