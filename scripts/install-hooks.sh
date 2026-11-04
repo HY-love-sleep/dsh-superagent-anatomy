@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Install this repo's git hooks into .git/hooks.
+# Install this repo's git hooks into the hooks directory Git actually uses.
 #
 # Hooks are not committed, so every fresh clone needs this once:
 #   sh scripts/install-hooks.sh
@@ -10,7 +10,9 @@
 set -eu
 
 root=$(git rev-parse --show-toplevel)
-hooks="$root/.git/hooks"
+# --git-path also resolves linked worktrees and submodules, where .git is a
+# file and the real hooks live outside this working tree.
+hooks=$(git rev-parse --path-format=absolute --git-path hooks)
 mkdir -p "$hooks"
 
 cat > "$hooks/pre-commit" <<'HOOK'
