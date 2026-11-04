@@ -41,6 +41,17 @@
 - **不号称跑通。** 这里的结论来自读源码和读上游文档，不是端到端运行的证明。涉及运行时行为的推断都单独标注了口径。
 - **不含任何凭据、私聊内容或工作数据。**
 
+## 本地检查
+
+改完文章先跑一遍，避免推上去才发现断链：
+
+```sh
+python3 scripts/check_links.py     # 相对链接 + 上游引用必须锁 commit
+sh scripts/install-hooks.sh        # 装成 pre-commit hook，提交前自动跑
+```
+
+hook 装在 `.git/hooks/`，不进仓库，所以每次 fresh clone 要重跑一次安装脚本。跳过用 `git commit --no-verify`。
+
 ## 复现流程图视频
 
 根目录的 `package.json` 只用于重新渲染流程视频，不是本仓库的主体。需要 Node.js 22+、FFmpeg 和 Hyperframes 使用的 Chromium：
