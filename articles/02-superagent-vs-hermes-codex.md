@@ -259,6 +259,6 @@ Superagent 更值得借鉴的是持续工作的组织机制：**谁授权、哪�
 - 原型文档：[000 Philosophy](<https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/docs/000-philosophy.md>)、[001 Domain](<https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/docs/001-domain.md>)、[002 Authorization](<https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/docs/002-authorization.md>)、[003 Execution](<https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/docs/003-execution.md>)、[004 Prompts](<https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/docs/004-prompts.md>)。
 - 架构索引：[007 Architecture:1–300](<https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/docs/007-architecture.md#L1-L300>)。
 - 局部代码：[Effects](<https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/src/app/effects.ts#L42-L159>)、[Replies](<https://github.com/deepseek-ai/dsh-superagent-prototype/blob/6337fc823ce20251c8de8085948165c81aaa701e/src/core/replies.ts#L20-L95>)。
-- 仓库内延伸阅读：[飞书请求到 Worker 的源码追踪](<feishu-to-worker-source-trace.zh-CN.md>)。
+- 仓库内延伸阅读：[飞书请求到 Worker 的源码追踪](<01-feishu-to-worker.md>)。
 
 以上是设计与局部代码核查，不是运行正确性认证；比较基线的原始流程说明不随本文公开，因此其脚本行为不能由本文独立复现。

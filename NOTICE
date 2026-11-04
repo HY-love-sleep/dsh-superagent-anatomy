@@ -1,0 +1,28 @@
+# NOTICE
+
+This repository is an unofficial, source-level study of a third-party project.
+
+## Upstream
+
+- Project: `deepseek-ai/dsh-superagent-prototype`
+- URL: https://github.com/deepseek-ai/dsh-superagent-prototype
+- Pinned commit: `6337fc823ce20251c8de8085948165c81aaa701e`
+- Licence: MIT
+- Copyright (c) 2026 DeepSeek Harness Team
+
+Code excerpts quoted in `articles/` and `docs/` are reproduced for the purpose of
+explaining upstream behaviour, under the terms of the upstream MIT licence.
+
+Upstream describes itself as a research prototype, not an official product. That
+statement is accepted here: nothing in this repository is a product claim, an
+endorsement by DeepSeek, or proof that the software runs correctly end to end.
+
+## Third-party assets in the rendered flow
+
+See `docs/superagent-flow/THIRD-PARTY-NOTICES.md` for GSAP and the open-source
+Chinese webfont subset used by the HTML player and the video.
+
+## What is not here
+
+No credentials, no private conversation content, no user avatars, and no work
+data from any organisation. The rendered video contains no such material.

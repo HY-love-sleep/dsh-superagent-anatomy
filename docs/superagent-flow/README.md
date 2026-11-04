@@ -30,7 +30,7 @@ python3 -m http.server 8090 --bind 127.0.0.1
 
 ## 内容口径与边界
 
-依据公开研究原型 [deepseek-ai/dsh-superagent-prototype](<https://github.com/deepseek-ai/dsh-superagent-prototype/tree/6337fc823ce20251c8de8085948165c81aaa701e>) 固定提交 `6337fc823ce20251c8de8085948165c81aaa701e`，详细追踪见 [源码说明](<../feishu-to-worker-source-trace.zh-CN.md>)；播放器“依据与边界”包含六个直接源码链接。
+依据公开研究原型 [deepseek-ai/dsh-superagent-prototype](<https://github.com/deepseek-ai/dsh-superagent-prototype/tree/6337fc823ce20251c8de8085948165c81aaa701e>) 固定提交 `6337fc823ce20251c8de8085948165c81aaa701e`，详细追踪见 [源码说明](<../../articles/01-feishu-to-worker.md>)；播放器“依据与边界”包含六个直接源码链接。
 
 这是静态源码解读，不是官方产品宣传或真实飞书端到端运行证明。特意保留以下边界：
 
