@@ -6,7 +6,7 @@
 
 ## Start here
 
-**▶ [Interactive 60-second flow walkthrough](https://hy-love-sleep.github.io/dsh-test/docs/superagent-flow/watch.html)** ｜ [MP4](docs/superagent-flow/superagent-flow.mp4)
+**▶ [Interactive 60-second flow walkthrough](https://hy-love-sleep.github.io/dsh-superagent-anatomy/superagent-flow/watch.html)** ｜ [MP4](docs/superagent-flow/superagent-flow.mp4)
 
 Opens and plays in the browser — no download, no local HTTP server.
 

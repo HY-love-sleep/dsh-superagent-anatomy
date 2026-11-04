@@ -6,7 +6,7 @@
 
 ## 从这里开始
 
-**▶ [60 秒交互流程图](https://hy-love-sleep.github.io/dsh-test/docs/superagent-flow/watch.html)** ｜ [MP4](docs/superagent-flow/superagent-flow.mp4) ｜ [六幕缩略图](docs/superagent-flow/evidence/frames/contact-sheet.jpg)
+**▶ [60 秒交互流程图](https://hy-love-sleep.github.io/dsh-superagent-anatomy/superagent-flow/watch.html)** ｜ [MP4](docs/superagent-flow/superagent-flow.mp4) ｜ [六幕缩略图](docs/superagent-flow/evidence/frames/contact-sheet.jpg)
 
 点开就能播放、拖动、跳到任意章节。不需要下载，也不需要在本机起 HTTP 服务。
 
